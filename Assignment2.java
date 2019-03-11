@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util*;
 
 /***************************************************************************************/
 //  Provide code for the methods in the classes Ships and Harbour, and in one place
@@ -52,7 +53,7 @@ public class Assignment2 {
     }
 }
 
-
+ 
 
 /* The class implementing a passenger. */
 // This class is completely provided to you, you don't have to change
@@ -116,20 +117,31 @@ class Passenger extends Thread {
     }
 }
 
+
+
+
+
 /* The class simulating an ship */
 // Now, here you will have to implement several methods
 class Ship extends Thread {
     public int         id;
     private Harbour    sp;
     private boolean enjoy;
+    private ArrayList<Passenger> inship;
+    private int numSeats;
+    private Semaphore readyToabaord;
     // your code here (other local variables and semaphores)
     
     // constructor
     public Ship(Harbour sp, int id) {
+        
         this.sp = sp;
         this.id = id;
         enjoy = true;
-        
+        numSeats = 2;
+        inship = new ArrayList<Passenger>();
+        readyToboard = new Semaphore(0);// set a semaphore to whether is ready to go
+        readyToLeave = new Semaphore(0);
         // your code here (local variable and semaphore initializations)
     }
 
@@ -146,7 +158,7 @@ class Ship extends Thread {
                 System.out.println("ship " + id + " arriving on dock " + dest);
                 
                 // Tell the passengers that we have arrived
-                            
+                   
                 // Wait until all passengers leave
           
                 System.out.println("ship " + id + " boarding to "+Assignment2.destName[dest]+" now! With " + numSeats + " seats");
@@ -174,21 +186,35 @@ class Ship extends Thread {
     // service functions to passengers
     // called by the passengers leaving the ship
     public void leave()  throws InterruptedException  {
+        inship.clear();
         // your code here
+
     }
 
     // called by the passengers sitting in the ship, to wait
     // until the launch
     public void wait4launch()  throws InterruptedException {
+        if(inship.size()<2){
+            readyToabaord.waitSem();
+        }else{
+            readyToabaord.signalSem();
+        }
         // your code here
     }
 
     // called by the bored passengers sitting in the ship, to wait
     // until arriving
     public void wait4arriving()  throws InterruptedException {
+        
         // your code here	
     }
 }
+
+
+
+
+
+
 
  
 /* The class implementing the Airport. */
@@ -235,6 +261,15 @@ class Harbour {
     // until there is an empty dock).
     // Try to rotate the docks so that no destination is starved
     public int wait4arriving(Ship sh)  throws InterruptedException  {
+       
+            for(int i = 0; i < docks.length.i++){
+                if(){
+                    string inHarbour = dock
+                }
+            
+            
+
+        }
         // your code here
     	
     	

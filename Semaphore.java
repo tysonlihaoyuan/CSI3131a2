@@ -1,4 +1,4 @@
-class Semaphore {
+public class Semaphore {
     private int count;
 
     public Semaphore(int count) {
